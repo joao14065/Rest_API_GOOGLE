@@ -1,6 +1,7 @@
 ﻿using api_google.Model;
 using api_google.Repository;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace api_google.Business.Implementation
 {
@@ -12,29 +13,24 @@ namespace api_google.Business.Implementation
             _repository = repository;
         }
 
-        public Person Create(Person item)
+        public bool Create(Person item)
         {
-            return _repository.Create(item);
+            return _repository.Save(item);
         }
 
-        public void Delete(long Id)
+        public bool Delete(long Id)
         {
-            _repository.Delete(Id);
+            return _repository.Delete(Id);
         }
 
-        public List<Person> FindAll()
+        public IQueryable<Person> FindAll()
         {
             return _repository.FindAll();
         }
 
         public Person FindById(long Id)
         {
-            return _repository.FindById(Id);
-        }
-
-        public Person Update(Person item)
-        {
-            return _repository.Update(item);
+            return _repository.Find(Id);
         }
     }
 }

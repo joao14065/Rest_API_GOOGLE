@@ -22,7 +22,7 @@ namespace api_google.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_personBusiness.FindAll());
+            return Ok(_personBusiness.FindAll().ToList());
         }
         [HttpGet("{id}")]
         public IActionResult Get(long id)
@@ -35,21 +35,14 @@ namespace api_google.Controllers
         public IActionResult Post([FromBody] Person person)
         {
             if (person == null) return BadRequest();
-            return new ObjectResult(_personBusiness.Create(person));
-        }
-        [HttpPut]
-        public IActionResult Put([FromBody] Person person)
-        {
-            if (person == null) return BadRequest();
-            var updatedPerson = _personBusiness.Update(person);
-            if (updatedPerson == null) return BadRequest();
-            return new ObjectResult(updatedPerson);
+            if (_personBusiness.Create(person)) return Ok(person);
+            else return BadRequest();
         }
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            _personBusiness.Delete(id);
-            return NoContent();
+            if (_personBusiness.Delete(id)) return NoContent();
+            else return BadRequest();
         }
     }
 }
