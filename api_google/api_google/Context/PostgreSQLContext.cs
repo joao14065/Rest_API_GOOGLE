@@ -11,7 +11,7 @@ namespace api_google.Context
         }
         public PostgreSQLContext(DbContextOptions<PostgreSQLContext> options) : base(options) { }
 
-        public DbSet<Person> Person { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
 
     }
 

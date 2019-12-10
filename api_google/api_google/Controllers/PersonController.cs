@@ -32,7 +32,7 @@ namespace api_google.Controllers
             return Ok(person);
         }
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] Usuario person)
         {
             if (person == null) return BadRequest();
             if (_personBusiness.Create(person)) return Ok(person);

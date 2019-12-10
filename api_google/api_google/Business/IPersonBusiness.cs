@@ -8,9 +8,9 @@ namespace api_google.Business
 {
     public interface IPersonBusiness
     {
-        bool Create(Person Person);
-        Person FindById(long Id);
-        IQueryable<Person> FindAll();
+        bool Create(Usuario Person);
+        Usuario FindById(long Id);
+        IQueryable<Usuario> FindAll();
         bool Delete(long Id);
     }
 }

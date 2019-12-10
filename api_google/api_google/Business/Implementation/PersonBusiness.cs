@@ -7,13 +7,13 @@ namespace api_google.Business.Implementation
 {
     public class PersonBusiness : IPersonBusiness
     {
-        private IRepository<Person> _repository;
-        public PersonBusiness(IRepository<Person> repository)
+        private IRepository<Usuario> _repository;
+        public PersonBusiness(IRepository<Usuario> repository)
         {
             _repository = repository;
         }
 
-        public bool Create(Person item)
+        public bool Create(Usuario item)
         {
             return _repository.Save(item);
         }
@@ -23,12 +23,12 @@ namespace api_google.Business.Implementation
             return _repository.Delete(Id);
         }
 
-        public IQueryable<Person> FindAll()
+        public IQueryable<Usuario> FindAll()
         {
             return _repository.FindAll();
         }
 
-        public Person FindById(long Id)
+        public Usuario FindById(long Id)
         {
             return _repository.Find(Id);
         }
