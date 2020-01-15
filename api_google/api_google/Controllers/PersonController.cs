@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using api_google.Business;
 using api_google.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api_google.Controllers
 {
     [ApiController]
+    [Authorize()]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
     public class PersonController : ControllerBase

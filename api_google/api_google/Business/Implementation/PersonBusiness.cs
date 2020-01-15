@@ -1,7 +1,9 @@
 ﻿using api_google.Model;
 using api_google.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace api_google.Business.Implementation
 {
@@ -31,6 +33,11 @@ namespace api_google.Business.Implementation
         public Usuario FindById(long Id)
         {
             return _repository.Find(Id);
+        }
+
+        public IQueryable<Usuario> Find(Expression<Func<Usuario, bool>> where, bool somenteLeitura = false)
+        {
+            return _repository.Find(where);
         }
     }
 }
