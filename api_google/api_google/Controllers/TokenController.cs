@@ -31,26 +31,23 @@ namespace api_google.Controllers
             var user = _personBusiness.Find(p => !p.Excluido && p.Email == model.Email && p.Senha == model.Senha).FirstOrDefault();
             if (user != null)
             {
-                var claims = new[]
-                {
-                    new Claim(JwtRegisteredClaimNames.UniqueName, model.Email),
-                };
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                // tempo de expiração do token: 1 hora
                 var expiration = DateTime.UtcNow.AddHours(1);
-                JwtSecurityToken token = new JwtSecurityToken(
-                   issuer: null,
-                   audience: null,
-                   claims: claims,
-                   expires: expiration,
-                   signingCredentials: creds);
+               var response =  _personBusiness.GetToken(model.Email, expiration);
 
-                return Ok(new
+                if (response.Contains("Falha"))
                 {
-                    Token = new JwtSecurityTokenHandler().WriteToken(token),
-                    Expiration = expiration
-                });
+                    return BadRequest("Falha na requisição");
+
+                }
+                else
+                {
+                    return Ok(new
+                    {
+                        Token = response,
+                        Expiration = expiration
+                    });
+                }
+                
             }
             return BadRequest("Credenciais inválidas.");
         }

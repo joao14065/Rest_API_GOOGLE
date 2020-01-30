@@ -13,6 +13,7 @@ namespace api_google.Business
         Usuario FindById(long Id);
         IQueryable<Usuario> Find(Expression<Func<Usuario, bool>> where, bool somenteLeitura = false);
         IQueryable<Usuario> FindAll();
+        string GetToken(string Email, DateTime expiration);
         bool Delete(long Id);
     }
 }
